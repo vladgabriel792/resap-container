@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/home.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <div class="logo"><a href="/home.html"><img src="/public/images/logo-2.png" alt="Retis Logo" height="50"></a></div>
+        <div class="burger-menu" onclick="toggleMenu()">
+            <div class="burger-line"></div>
+            <div class="burger-line"></div>
+            <div class="burger-line" ></div>
+        </div>
+        <nav class="menu">
+            <a href="#despre-noi">Despre noi</a>
+            <a href="#contact">Contact</a>
+            <a href="#produse">Produse</a>
+        </nav>
+    </header>
+
+    <article>
+        <!-- <img src="/public/images/truck-header.jpg" alt=""> -->
+        <video class="video-banner" autoplay muted loop playsinline>
+            <source src="/public/videos/Retis.mp4" type="video/mp4">
+            Browserul dvs. nu suporta tag-ul video.
+        </video>
+        <div class="titlewrapper">
+            <span class="typewriter-text"></span>
+        </div>
+        <h2 class="title">
+             Economisește inteligent!</h2>
+        <button>Contactează-ne</button>
+    </article>
+    <script>
+        document.addEventListener("mousemove", (e) => {
+            const img = document.querySelector("article video");
+            const { clientX, clientY } = e;
+            
+            // Get the center of the screen
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            
+            // Calculate offset based on mouse position
+            const moveX = (clientX - centerX) * 0.01; // Adjust sensitivity
+            const moveY = (clientY - centerY) * 0.01;
+
+            // Apply transform
+            img.style.transform = `translate(-50%, -50%) translate(${moveX}px, ${moveY}px)`;
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const text = "Rulează mai mult."; // The text to display
+            const span = document.querySelector(".typewriter-text");
+            let index = 0;
+
+            function type() {
+                if (index < text.length) {
+                    span.textContent += text.charAt(index);
+                    index++;
+                    setTimeout(type, 300); // Adjust typing speed here
+                }
+            }
+
+            type(); // Start the typing effect
+            setTimeout(() => {
+                span.style.animation = 'none';
+                span.style.borderColor = 'transparent';
+            },300*20)
+        });
+
+        function toggleMenu() {
+            const menu = document.querySelector('.menu');
+            const lines = document.querySelectorAll('.burger-line');
+            lines.forEach(line => line.classList.toggle('open'));
+            menu.classList.toggle('active');
+        }
+
+    </script>
+</body>
+</html>

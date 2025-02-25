@@ -1,0 +1,232 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Plus Jakarta Sans", serif;
+    font-optical-sizing: auto;
+}
+
+body{
+    overflow-x: hidden;
+}
+
+header { 
+    position: absolute;
+    width: 100%;
+    z-index: 2; 
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-between; 
+    align-items: center;
+    color: white; 
+    padding: 20px 50px;
+}
+
+.logo img{
+    height: 2.5rem;
+    margin-top: 5px;
+    filter: brightness(.8);
+}
+
+.menu {
+    display: flex;
+    align-content: center;
+    margin: 0 5% 0 0; 
+}
+.menu a { 
+    color: white; 
+    text-decoration: none; 
+    margin: 0 10px; 
+    align-self: center;
+    display: inline-block;
+    transition: all .35s ease-in-out;
+    font-size: 14px;
+    &:hover{
+        color: var(--secondary-color);
+    }
+}
+.menu.show{
+    flex-direction: column;
+}
+
+.burger-menu {
+    width: fit-content;
+    height: 100%;
+    position: relative;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    gap: 5px;
+    z-index: 2;
+}
+.burger-menu:hover > .burger-line{
+    /* background-color: var(--secondary-color); */
+    cursor: pointer;
+}
+.burger-menu .burger-line{
+    width: 30px;
+    height: 4px;
+    background-color: white;
+    border-radius: 2px;
+    margin: 0px;
+}
+
+.burger-line.open:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+}
+.burger-line.open:nth-child(2) {
+    transform: translateX(100px);
+}
+.burger-line.open:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+
+article {
+    position: relative;
+    width: 100vw;
+    height: 100dvh; /* Full screen height */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px;
+}
+
+article video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 110%; /* Slightly larger to prevent empty spaces */
+    height: 110%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out;
+    filter: brightness(.4);
+}
+
+article h2{
+    position: relative;
+    font-weight: 600;
+    font-size: clamp(28px, 4vw + 1rem, 80px);
+    color: whitesmoke;
+    text-align: center;
+    letter-spacing: 1.1px;
+    line-height: clamp(2.5rem, 4vw + 1rem, 4.5rem);
+}
+
+article span{
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(90deg, #30cb59, #3c3ccb); /* Adjust colors */
+    -webkit-background-clip: text;
+    font-weight: 800;
+    background-clip: text;
+    -webkit-text-fill-color: transparent; /* Makes the text take the gradient */
+    font-weight: bold; /* Optional: Enhances visibility */
+
+   
+    font-size: clamp(28px, 4vw + 1rem, 80px);
+    line-height: auto;
+    padding-right: 5px;
+    display: inline-block; 
+    overflow: hidden;
+    white-space: nowrap;
+    width: fit-content;
+    border-right: clamp(2px,.5vw, 6px) solid ; 
+    transition: all .35s ease-in-out;
+    animation: blink-caret .5s step-start infinite; 
+}
+
+article button{
+    position: relative;
+    border: 2px whitesmoke solid;
+    background-color: whitesmoke;
+    border-radius: .4rem;
+    margin: 30px 0px 0px 0px;
+    margin-top: clamp(20px, 4vw + .5rem, 50px);
+    padding: clamp(10px,2vw,12px) 20px;
+    transition: all .35s ease-in-out;
+    cursor: pointer;
+    align-self: center;
+    font-size: clamp(12px, 2vw + .4rem, 18px);
+    font-weight: 500;
+}
+
+article button:hover{
+    color: whitesmoke;
+    background-color: transparent;
+}
+
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    /* 50% { border-color: rgb(232, 232, 232); } Change to your text color */
+    50% { border-color: whitesmoke } /* Change to your text color */
+}
+
+@media only screen and (max-width: 768px) {
+    .burger-line{
+        transition: all .35s ease-in-out;
+    }
+    header {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        transition: all .35s ease-in-out;
+    }
+    .logo {
+        width: fit-content;
+        align-items: center;
+        align-content: center;
+    }
+    .burger-menu {
+        display: flex;
+    }
+    .menu {
+        /* display: none; */
+        top: 0px;
+        position: absolute;
+        flex-direction: column;
+        align-items: center;
+        height: 100dvh;
+        width: 100%;
+        background-color: black;
+        transition: all .4s ease-in-out;
+        transform: translateX(100%);
+        padding: 100px 30px;
+    }
+    .menu.active {
+        display: flex;
+        
+        transform: translateX(40%);
+        z-index: -1;
+    }
+    .menu a {
+        margin: 10px 0;
+        font-weight: 500;
+        color: rgb(225, 225, 225);
+        font-size: clamp(16px,4vw + 1rem, 22px);
+        text-align: left;
+        width: 100%;
+        &:hover{
+           color: #4545cf;
+        }
+    }
+
+    article {
+        justify-content: flex-end;
+    }
+    article h2{
+        text-align: left;
+        max-width: 700px;
+    }
+    article button{
+        align-self: flex-start;
+    }
+
+    article .titlewrapper{
+        align-self: flex-start;
+    }
+}
